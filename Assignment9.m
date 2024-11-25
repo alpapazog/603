@@ -1,7 +1,7 @@
 % Load the dataset
-data = readtable('moonDataset.csv'); % Adjust the path as necessary
-features = data{:, 1:3};  % First three columns are features
-labels = data{:, 4};      % Fourth column is the label (0 or 1)
+data = readtable('moonDataset.csv');
+features = data{:, 1:3};  % features
+labels = data{:, 4};      % label (0 or 1)
 
 % Partition the data into training (150 samples) and testing (50 samples)
 train_features = features(1:150, :);
@@ -38,10 +38,11 @@ for i = 1:nBootstrap
 
     % Suppress the training window
     net.trainParam.showWindow = false;
-    % Train the network
+    
     % Apply L2 regularization (default is 0)
     net.performParam.regularization = 0.01;
 
+    % Train the network
     net = train(net, train_data.features', train_data.labels');
     
     % Test the network
